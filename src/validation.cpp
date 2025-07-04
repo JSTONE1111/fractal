@@ -4319,6 +4319,10 @@ void Chainstate::LoadExternalBlockFile(
                 }
                 // read size
                 blkdat >> nSize;
+
+                unsigned int auxpow_size;
+                blkdat >> auxpow_size;
+
                 if (nSize < 80 || nSize > MAX_BLOCK_SERIALIZED_SIZE)
                     continue;
             } catch (const std::exception&) {
