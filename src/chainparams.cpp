@@ -138,6 +138,7 @@ public:
         // release ASAP to avoid it where possible.
         vSeeds.clear();
         vSeeds.emplace_back("dnsseed-mainnet.fractalbitcoin.io.");
+        vSeeds.emplace_back("dnsseed-mainnet.unisat.io.");
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1,0);
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1,5);
