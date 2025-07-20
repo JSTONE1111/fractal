@@ -123,15 +123,14 @@ static bool GenerateBlock(ChainstateManager& chainman, CBlock& block, uint64_t& 
     block_hash.SetNull();
     block.hashMerkleRoot = BlockMerkleRoot(block);
 
-    auto& miningHeader = CAuxPow::initAuxPow(block);
-    while (max_tries > 0 && miningHeader.nNonce < std::numeric_limits<uint32_t>::max() && !CheckProofOfWork(miningHeader.GetHash(), block.nBits, chainman.GetConsensus()) && !ShutdownRequested()) {
-        ++miningHeader.nNonce;
+    while (max_tries > 0 && block.nNonce < std::numeric_limits<uint32_t>::max() && !CheckProofOfWork(block.GetHash(), block.nBits, chainman.GetConsensus()) && !ShutdownRequested()) {
+        ++block.nNonce;
         --max_tries;
     }
     if (max_tries == 0 || ShutdownRequested()) {
         return false;
     }
-    if (miningHeader.nNonce == std::numeric_limits<uint32_t>::max()) {
+    if (block.nNonce == std::numeric_limits<uint32_t>::max()) {
         return true;
     }
 
